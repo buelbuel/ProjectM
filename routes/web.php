@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,11 +20,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -32,4 +34,20 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/account/show/{id}', [AccountController::class, 'show']);
+    Route::get('/accounts/index', [AccountController::class, 'index'])
+        ->name('accounts.index');
+
+    Route::get('/contact/show/{id}', [ContactController::class, 'show']);
+    Route::get('/contacts/index', [ContactController::class, 'index'])
+        ->name('contacts.index');
+
+    Route::get('/item/show/{number}', [ItemController::class, 'show']);
+    Route::get('/items/index', [ItemController::class, 'index'])
+        ->name('items.index');
+        
+    Route::get('/project/show/{id}', [ProjectController::class, 'show']);
+    Route::get('/projects/index', [ProjectController::class, 'index'])
+        ->name('projects.index');
 });
