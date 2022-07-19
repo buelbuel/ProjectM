@@ -24,12 +24,17 @@ class ItemController extends Controller
      */
     public function index(Request $request): \Inertia\Response
     {
+        /*
+         * TODO: paginate, auth, filter
+         * https://stackoverflow.com/questions/66846136/laravel-inertia-vuejs-pagination
+         * 
+         */
         $queriedItems = Item::select([
             'items.*',
+            'projects.number as project_number',
             'projects.name as project_name',
-            'projects.account_id as account_id',
             'accounts.name as account_name',
-            'accounts.id as account_id', // TODO: number
+            'accounts.number as account_number', // TODO: number
             'users.name as user_name',
             'users.profile_photo_path as user_profile_photo_path'
         ])
@@ -47,6 +52,7 @@ class ItemController extends Controller
         ->where('projects.status_id', '<>', '6')
         ->where('projects.deleted_at', '=', null)
         ->orderBy('projects.created_at')
+        ->take(20)
         ->get();
 
         $allUsers = User::select([
@@ -137,6 +143,7 @@ class ItemController extends Controller
         ->where('projects.status_id', '<>', '6')
         ->where('projects.deleted_at', '=', null)
         ->orderBy('projects.created_at')
+        ->take(20)
         ->get();
 
         $allUsers = User::select([

@@ -167,7 +167,7 @@ const showItem = ($number) => {
                             </td>
                             <td class="p-2">
                                 <a class="hover:text-blue-600"
-                                :href="'/accounts/' + item.account_id">
+                                :href="'/accounts/' + item.account_number">
                                     {{ item.account_name }}
                                 </a>
                             </td>

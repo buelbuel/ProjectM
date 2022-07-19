@@ -30,11 +30,10 @@ class Project extends Model
      */
     protected $fillable = [
         'account_id',
-        'vendor_id',
         'user_id',
         'name',
         'description',
-        'status',
+        'status_id',
     ];
 
     /**

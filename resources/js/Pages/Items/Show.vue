@@ -382,6 +382,7 @@ const deleteItem = () => {
                             type="number"
                             :value="$page.props.item.tracked"
                             id="tracked"
+                            step="0.5"
                         />
                     </div>
                     <div class="col-span-2">
@@ -390,6 +391,7 @@ const deleteItem = () => {
                             type="number"
                             :value="$page.props.item.estimated"
                             id="estimated"
+                            step="0.5"
                         />
                     </div>
                     <div class="col-span-1 text-xs">

@@ -38,6 +38,25 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Consolidate first and last names
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+    
+    /**
+     * Scope priority of order by names
+     *
+     */
+    public function scopeOrderByName($query)
+    {
+        $query->orderBy('last_name')->orderBy('first_name');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]

@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-use Laravel\Scout\Searchable;
 
 class Item extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +22,8 @@ class Item extends Model
     protected $fillable = [
         'project_id',
         'user_id',
-        'parent_id',
-        'status',
-        'priority',
+        'status_id',
+        'priority_id',
         'name',
         'description',
         'tracked',

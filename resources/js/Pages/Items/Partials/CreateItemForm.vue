@@ -66,8 +66,8 @@ const createItem = () => {
 </script>
 
 <template>
-    <JetModalFormSection @submitted="createItem">
-        <template #form>{{$page.props}}
+    <ModalFormSection @submitted="createItem">
+        <template #form>
             <div class="col-span-6">
                 <JetLabel for="name" value="Name" />
                 <JetInput id="name" v-model="form.name" type="text" class="mt-1 block w-full border-gray-200"
@@ -302,5 +302,5 @@ const createItem = () => {
                 Save
             </JetButton>
         </template>
-    </JetModalFormSection>
+    </ModalFormSection>
 </template>

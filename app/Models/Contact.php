@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -11,6 +12,35 @@ class Contact extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    /**
+     * The one-to-many relationships of this Object.
+     *
+     * @return BelongsTo
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    /**
+     * Consolidate first and last names
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+    
+    /**
+     * Scope priority of order by names
+     *
+     */
+    public function scopeOrderByName($query)
+    {
+        $query->orderBy('last_name')->orderBy('first_name');
+    }
 
     /**
      * The attributes that are mass assignable.
