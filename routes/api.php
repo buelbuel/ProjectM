@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +29,15 @@ Route::prefix('/account')->group( function() {
         ->name('account.update');
     Route::delete('/{id}', [AccountController::class, 'destroy'])
         ->name('account.destroy');
+});
+
+Route::prefix('/contact')->group( function() {
+    Route::post('/store', [ContactController::class, 'store'])
+        ->name('contact.store');
+    Route::put('/{id}' , [ContactController::class, 'update'])
+        ->name('contact.update');
+    Route::delete('/{id}', [ContactController::class, 'destroy'])
+        ->name('contact.destroy');
 });
 
 Route::prefix('/item')->group( function() {

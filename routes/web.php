@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -44,7 +45,9 @@ Route::middleware([
         ->name('contacts.index');
 
     Route::get('/item/{number}', [ItemController::class, 'show']);
-    Route::get('/items', [ItemController::class, 'index'])
+    Route::get('/items', [ItemController::class, 'index'], function(Request $request) {
+        return $request->user();
+    })
         ->name('items.index');
         
     Route::get('/project/{id}', [ProjectController::class, 'show']);

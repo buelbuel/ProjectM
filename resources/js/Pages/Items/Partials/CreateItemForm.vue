@@ -23,6 +23,7 @@ const props = defineProps({
     users: Object,
     statuses: Object,
     priorities: Object,
+    user: Object,
 });
 
 const projects = props.projects;
@@ -47,6 +48,7 @@ const form = useForm({
     due_date: '',
     tracked: '',
     estimated: '',
+    created_by: props.user.id,
     created_at: moment().format('DD-MM-YYYY'),
 });
 

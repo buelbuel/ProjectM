@@ -77,13 +77,14 @@ class ItemController extends Controller
         ])
         ->orderBy('priorities.id')
         ->get();
-
+        
         return Jetstream::inertia()->render($request, 'Items/Index', [
             'items' => $queriedItems,
             'projects' => $allProjects,
             'users' => $allUsers,
             'statuses' => $allStatuses,
             'priorities' => $allPriorities,
+            'user' => $request->user(),
         ]);
     }
 
@@ -106,7 +107,7 @@ class ItemController extends Controller
         $newItem->due_date = $request->due_date;
         $newItem->tracked = $request->tracked;
         $newItem->estimated = $request->estimated;
-        $newItem->created_by = $request->user();
+        $newItem->created_by = $request->created_by;
         $newItem->created_at = $request->created_at;
 
         $newItem->save();
