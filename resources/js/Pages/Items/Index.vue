@@ -86,29 +86,6 @@ const showItem = ($number) => {
 
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 overflow-x-auto">
             <template v-if="$page.props.items.length > 0">
-                <div class="w-full text-xs font-bold leading-none px-2 mb-8">
-                    <div class="inline-flex flex-wrap space-y-2 md:space-y-0 md:space-x-4">
-                        <div class="inline-flex justify-start space-x-2 items-center">
-                            <span class="text-gray-600">Status:</span>
-                            <a href="#"><Badge class="border text-gray-600 bg-white border-gray-600 hover:bg-gray-600 hover:text-gray-100 transition">Backlog</Badge></a>
-                            <a href="#"><Badge class="border text-yellow-600 bg-white border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 transition">To Do</Badge></a>
-                            <a href="#"><Badge class="border text-blue-600 bg-white border-blue-600 hover:bg-blue-600 hover:text-blue-100 transition">In Progress</Badge></a>
-                            <a href="#"><Badge class="border text-green-600 bg-white border-green-600 hover:bg-green-600 hover:text-green-100 transition">Completed</Badge></a>
-                        </div>
-                        <div class="inline-flex justify-start space-x-2 items-center">
-                            <span class="text-gray-600">Priority:</span>
-                            <a href="#"><Badge class="border text-green-600 bg-white border-green-600 hover:bg-green-600 hover:text-green-100 transition">Low</Badge></a>
-                            <a href="#"><Badge class="border text-yellow-600 bg-white border-yellow-600 hover:bg-yellow-600 hover:text-yellow-100 transition">Normal</Badge></a>
-                            <a href="#"><Badge class="border text-red-600 bg-white border-red-600 hover:bg-red-600 hover:text-red-100 transition">High</Badge></a>
-                        </div>
-                        <div class="inline-flex justify-start space-x-2 items-center">
-                            <span class="text-gray-600">Dates:</span>
-                            <a href="#"><Badge class="border text-blue-600 bg-white border-blue-600 hover:bg-blue-600 hover:text-blue-100 transition">Start Today</Badge></a>
-                            <a href="#"><Badge class="border text-blue-600 bg-white border-blue-600 hover:bg-blue-600 hover:text-blue-100 transition">Due Today</Badge></a>
-                            <a href="#"><Badge class="border text-red-600 bg-white border-red-600 hover:bg-red-600 hover:text-red-100 transition">Due Past</Badge></a>
-                        </div>
-                    </div>
-                </div>
                 <table class="table-auto w-full text-sm">
                     <thead class="table-header-group">
                         <tr class="text-left text-gray-800">
