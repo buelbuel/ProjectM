@@ -10,6 +10,8 @@ import FormModal from '@/Shared/FormModal.vue';
 import moment from "moment";
 import { VueTruncateHtml } from 'vue3-truncate-html';
 import { CalendarIcon, ClockIcon } from '@heroicons/vue/outline'
+import Pagination from '@/Shared/Pagination'
+import SearchFilter from '@/Shared/SearchFilter'
 
 const isTruncated = ref(true);
 const displayCreateItem = ref(false);
@@ -19,6 +21,12 @@ const props = defineProps({
     users: Object,
     statuses: Object,
     priorities: Object,
+    filters: Object,
+});
+
+const form = useForm({
+        search: this.filters.search,
+        trashed: this.filters.trashed,
 });
 
 const createItem = () => {
@@ -85,7 +93,7 @@ const showItem = ($number) => {
         </FormModal>
 
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 overflow-x-auto">
-            <template v-if="$page.props.items.length > 0">
+            <template v-if="$page.props.items.data.length > 0">
                 <table class="table-auto w-full text-sm">
                     <thead class="table-header-group">
                         <tr class="text-left text-gray-800">
@@ -104,8 +112,8 @@ const showItem = ($number) => {
                         </tr>
                     </thead>
                     <tbody
-                        v-for="item in $page.props.items"
-                        :key="item.id"
+                        v-for="item in $page.props.items.data"
+                        :key="item.number"
                     >
                         <tr class="border border-gray-200 hover:bg-gray-50 text-gray-800" @click="showItem(item.number)">
                             <td class="p-2 font-semibold text-gray-600">#{{ item.number }}</td>

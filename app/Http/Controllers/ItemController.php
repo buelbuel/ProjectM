@@ -8,9 +8,10 @@ use App\Models\Project;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 
@@ -28,7 +29,7 @@ class ItemController extends Controller
          * TODO: paginate, auth, filter
          * https://stackoverflow.com/questions/66846136/laravel-inertia-vuejs-pagination
          * 
-         */
+         *
         $queriedItems = Item::select([
             'items.*',
             'projects.number as project_number',
@@ -77,14 +78,38 @@ class ItemController extends Controller
         ])
         ->orderBy('priorities.id')
         ->get();
-        
+
         return Jetstream::inertia()->render($request, 'Items/Index', [
             'items' => $queriedItems,
             'projects' => $allProjects,
             'users' => $allUsers,
             'statuses' => $allStatuses,
             'priorities' => $allPriorities,
-            'user' => $request->user(),
+        ]);*/
+        return Inertia::render('Items/Index', [
+            'filters' => Request::all('search', 'trashed'),
+            'items' => Auth::user()->items()
+                ->with('project')
+                ->orderBy('items.created_at')
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn ($item) => [
+                    'number' => $item->number,
+                    'name' => $item->name,
+                    'project_id' => $item->organization ? $item->project_id->only('name') : null,
+                    'description' => $item->description,
+                    'user_id' => $item->user_id,
+                    'status_id' => $item->status_id,
+                    'priority_id' => $item->priority_id,
+                    'start_date' => $item->start_date,
+                    'due_date' => $item->due_date,
+                    'tracked' => $item->tracked,
+                    'estimated' => $item->estimated,
+                    'created_by' => $item->created_by,
+                    'created_at' => $item->created_at,
+                    'deleted_at' => $item->deleted_at,
+                ]),
         ]);
     }
 
