@@ -30,7 +30,7 @@ const closeModal = () => {
 }
 
 const showItem = ($number) => {
-    Inertia.visit('/item/show/' + $number);
+    Inertia.visit('/item/' + $number);
 }
 </script>
 
@@ -38,7 +38,7 @@ const showItem = ($number) => {
     <AppLayout title="Items">
         <template #header>
             <div class="inline-flex justify-between w-full">
-                <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
                     Items
                 </h2>
                 <JetButton @click="createItem()">

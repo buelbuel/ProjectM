@@ -71,7 +71,7 @@ const deleteItem = () => {
     <AppLayout :title="$page.props.item.name">
         <template #header>
             <div class="inline-flex justify-between w-full">
-                <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
                     #{{ $page.props.item.number }}
                 </h2>
                 <div class="inline-flex justify-end w-full space-x-3">
@@ -201,7 +201,7 @@ const deleteItem = () => {
                                     leave-to-class="opacity-0"
                                 >
                                     <ListboxOptions
-                                        class="absolute max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                        class="absolute z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                     >
                                         <ListboxOption
                                             v-slot="{ active, selected }"
@@ -267,7 +267,7 @@ const deleteItem = () => {
                                     leave-to-class="opacity-0"
                                 >
                                     <ListboxOptions
-                                        class="absolute max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                        class="absolute z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                     >
                                         <ListboxOption
                                             v-slot="{ active, selected }"
@@ -324,7 +324,7 @@ const deleteItem = () => {
                                     leave-to-class="opacity-0"
                                 >
                                     <ListboxOptions
-                                        class="absolute max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                        class="absolute z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                     >
                                         <ListboxOption
                                             v-slot="{ active, selected }"

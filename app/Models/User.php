@@ -36,16 +36,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Project::class);
     }
-
-    /**
-     * Consolidate first and last names
-     *
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return $this->first_name.' '.$this->last_name;
-    }
     
     /**
      * Scope priority of order by names
