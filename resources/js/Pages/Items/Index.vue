@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import { useForm } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetButton from '@/Jetstream/Button.vue';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
@@ -10,8 +11,6 @@ import FormModal from '@/Shared/FormModal.vue';
 import moment from "moment";
 import { VueTruncateHtml } from 'vue3-truncate-html';
 import { CalendarIcon, ClockIcon } from '@heroicons/vue/outline'
-import Pagination from '@/Shared/Pagination'
-import SearchFilter from '@/Shared/SearchFilter'
 
 const isTruncated = ref(true);
 const displayCreateItem = ref(false);
@@ -22,11 +21,6 @@ const props = defineProps({
     statuses: Object,
     priorities: Object,
     filters: Object,
-});
-
-const form = useForm({
-        search: this.filters.search,
-        trashed: this.filters.trashed,
 });
 
 const createItem = () => {
