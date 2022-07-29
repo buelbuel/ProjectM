@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Remove the rounded borders of DaisyUIs tables
+ */
+.table :where(:first-child) :where(:first-child) :where(th, td):first-child,
+.table :where(:first-child) :where(:first-child) :where(th, td):last-child,
+.table :where(:last-child) :where(:last-child) :where(th, td):first-child, 
+.table :where(:last-child) :where(:last-child) :where(th, td):last-child {
+  border-radius: 0;
+}
