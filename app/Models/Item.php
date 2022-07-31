@@ -18,6 +18,11 @@ class Item extends Model
      *
      * @return HasMany
      */
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

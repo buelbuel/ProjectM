@@ -25,14 +25,14 @@ class ItemController extends Controller
      */
     public function index(): \Inertia\Response
     {
-
-        dd(Auth::user()->teams());
         return Inertia::render('Items/Index', [
-            'items' => Auth::user()->teams()->items()
+            'items' => Auth::user()
+                ->currentTeam
+                ->items()
                 ->with('project')
                 ->orderBy('items.created_at')
                 ->paginate(20)
-                ->withQueryString()
+                //->withQueryString()
                 ->through(fn ($item) => [
                     'number' => $item->number,
                     'name' => $item->name,
@@ -64,7 +64,7 @@ class ItemController extends Controller
      */
     public function store(): RedirectResponse
     {
-        Auth::user()->items()->create(
+        Auth::user()->currentTeam->items()->create(
             Request::validate([
                 'name' => ['required', 'max:50'],
                 'description' => ['required', 'max:255'],
@@ -85,7 +85,7 @@ class ItemController extends Controller
             ])
         );
 
-        return Redirect::route('contacts')->with('success', 'Contact created.');
+        return Redirect::route('items')->with('success', 'Item created.');
     }
 
     /**

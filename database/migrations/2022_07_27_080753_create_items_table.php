@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('user_id')->constrained('users');
+            $table->integer('team_id')->index();
             $table->foreignId('status_id')->nullable()->constrained('statuses');
             $table->foreignId('priority_id')->nullable()->constrained('priorities');
 

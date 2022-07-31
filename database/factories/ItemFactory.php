@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class ItemFactory extends Factory
         return [
             'project_id' => Project::all()->random()->id,
             'user_id' => User::all()->random()->id,
+            'team_id' => Team::factory(),
             'name' => $this->faker->text(50),
             'description' => $this->faker->text(250),
             'status_id' => $this->faker->numberBetween(1,5),
