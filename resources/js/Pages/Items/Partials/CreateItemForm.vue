@@ -20,6 +20,7 @@ const props = defineProps({
     users: Object,
     statuses: Object,
     priorities: Object,
+    user: Object,
 });
 
 const projects = props.projects;
@@ -34,6 +35,7 @@ const selectedStatus = ref(statuses[0]);
 const selectedPriority = ref(priorities[0]);
 
 const form = useForm({
+    user: '',
     name: '',
     description: '',
     user_id: selectedUser.value['id'],

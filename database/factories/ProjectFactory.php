@@ -21,9 +21,9 @@ class ProjectFactory extends Factory
         return [
             'account_id' => Account::all()->random()->id,
             'user_id' => User::all()->random()->id,
-            'name' => $this->faker->text(30),
-            'description' => $this->faker->text(200),
-            'status_id' => $this->faker->numberBetween(1,5),
+            'name' => $this->faker->word(),
+            'description' => $this->faker->realText(200),
+            'status' => $this->faker->randomElement(['Backlog', 'In Progress', 'In Testing', 'Completed']),
             'created_by' => User::all()->random()->id,
             'created_at' => $this->faker->dateTime,
             'updated_at' => null,

@@ -3,6 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Project;
+use App\Models\Team;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -20,11 +23,11 @@ return new class extends Migration
 
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
-            $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('user_id')->constrained('users');
-            $table->integer('team_id')->index();
-            $table->foreignId('status_id')->nullable()->constrained('statuses');
-            $table->foreignId('priority_id')->nullable()->constrained('priorities');
+            $table->foreignIdFor(Project::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Team::class)->constrained();
+            $table->string('status')->default('Backlog');
+            $table->string('priority')->default('Normal');
 
             $table->string('number', 6)->unique();
             $table->string('name');

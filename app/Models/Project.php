@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,7 +55,6 @@ class Project extends Model
         'user_id',
         'name',
         'description',
-        'status_id',
     ];
 
     /**
@@ -68,6 +68,7 @@ class Project extends Model
         'deleted_at' => 'timestamp',
         'completed_at' => 'datetime',
         'hourly_rate' => 'double',
+        'status' => Status::class,
     ];
 
     /*

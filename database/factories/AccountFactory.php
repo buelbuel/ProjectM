@@ -27,8 +27,8 @@ class AccountFactory extends Factory
     {
         return [
             'created_by' => User::all()->random()->id,
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => $this->faker->company(),
+            'email' => $this->faker->unique()->companyEmail(),
             'phone' => $this->faker->phoneNumber(),
             'fax' => $this->faker->phoneNumber(),
             'shipping_street' => $this->faker->streetName(),

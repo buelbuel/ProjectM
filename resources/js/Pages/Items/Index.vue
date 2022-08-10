@@ -20,6 +20,7 @@ const props = defineProps({
     users: Object,
     statuses: Object,
     priorities: Object,
+    user: Object,
 });
 
 const displayCreateItemModal = () => {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Priority;
+use App\Enums\Status;
 use App\Models\Item;
-use App\Models\Priority;
 use App\Models\Project;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
+use Spatie\LaravelOptions\Options;
 
 class ItemController extends Controller
 {
@@ -26,13 +27,15 @@ class ItemController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Items/Index', [
-            'items' => Auth::user()
-                ->currentTeam
-                ->items()
+            'projects' => Project::orderBy('projects.created_at')->get()->map->only('number', 'name'),
+            'users' => User::orderBy('users.name')->get()->map->only('number', 'name'),
+            'priorities' => Options::forEnum(Priority::class),
+            'statuses' => Options::forEnum(Status::class),
+            'items' => Auth::user()->currentTeam->items()
                 ->with('project')
                 ->orderBy('items.created_at')
-                ->paginate(20)
-                //->withQueryString()
+                ->fastPaginate(20)
+                ->withQueryString()
                 ->through(fn ($item) => [
                     'number' => $item->number,
                     'name' => $item->name,
@@ -40,8 +43,8 @@ class ItemController extends Controller
                     'account' => $item->project ? $item->project->account->only('name', 'number') : null,
                     'description' => $item->description,
                     'user' => $item->user ? $item->user->only('name', 'number') : null,
-                    'status' => $item->status ? $item->status->only('name', 'id') : null,
-                    'priority' => $item->priority ? $item->priority->only('name', 'id') : null,
+                    'status' => $item->status,
+                    'priority' => $item->priority,
                     'start_date' => $item->start_date,
                     'due_date' => $item->due_date,
                     'tracked' => $item->tracked,
@@ -50,10 +53,6 @@ class ItemController extends Controller
                     'created_at' => $item->created_at,
                     'deleted_at' => $item->deleted_at,
                 ]),
-            'projects' => Project::orderBy('projects.created_at')->get()->map->only('number', 'name'),
-            'users' => User::orderBy('users.name')->get()->map->only('number', 'name'),
-            'statuses' => Status::orderBy('statuses.id')->get()->map->only('id', 'name'),
-            'priorities' => Priority::orderBy('priorities.id')->get()->map->only('id', 'name')
         ]);
     }
 
@@ -64,6 +63,7 @@ class ItemController extends Controller
      */
     public function store(): RedirectResponse
     {
+        dd(Auth::user());
         Auth::user()->currentTeam->items()->create(
             Request::validate([
                 'name' => ['required', 'max:50'],

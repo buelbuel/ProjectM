@@ -34,15 +34,27 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/account/{id}', [AccountController::class, 'show']);
-    Route::get('/accounts', [AccountController::class, 'index'])->name('accounts.index');
+    Route::controller(AccountController::class)->group( function () {
+        Route::get('/account/{id}', 'show');
+        Route::get('/accounts', 'index')
+        ->name('accounts.index');
+    });
 
-    Route::get('/contact/{id}', [ContactController::class, 'show']);
-    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::controller(ContactController::class)->group( function () {
+        Route::get('/contact/{id}', 'show');
+        Route::get('/contacts', 'index')
+        ->name('contacts.index');
+    });
 
-    Route::get('/item/{number}', [ItemController::class, 'show']);
-    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-        
-    Route::get('/project/{id}', [ProjectController::class, 'show']);
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::controller(ItemController::class)->group( function () {
+        Route::get('/item/{number}', 'show');
+        Route::get('/items', 'index')
+        ->name('items.index');
+    });
+            
+    Route::controller(ProjectController::class)->group( function () {
+        Route::get('/project/{id}', 'show');
+        Route::get('/projects', 'index')
+        ->name('projects.index');
+    });
 });

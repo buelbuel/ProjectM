@@ -1,8 +1,11 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Account;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -20,9 +23,9 @@ return new class extends Migration
 
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
-            $table->foreignId('account_id')->constrained('accounts');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('status_id')->nullable()->constrained('statuses');
+            $table->foreignIdFor(Account::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->string('status')->default('Backlog');
 
 
             $table->string('number', 6)->unique();

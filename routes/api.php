@@ -22,26 +22,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('/account')->group( function() {
-    Route::post('/store', [AccountController::class, 'store'])->name('account.store');
-    Route::put('/{id}' , [AccountController::class, 'update'])->name('account.update');
-    Route::delete('/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
+Route::prefix('/account')->controller(AccountController::class)->group( function () {
+    Route::post('/store', 'store')->name('account.store');
+    Route::put('/{id}' , 'update')->name('account.update');
+    Route::delete('/{id}', 'destroy')->name('account.destroy');
 });
 
-Route::prefix('/contact')->group( function() {
-    Route::post('/store', [ContactController::class, 'store'])->name('contact.store');
-    Route::put('/{id}' , [ContactController::class, 'update'])->name('contact.update');
-    Route::delete('/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+Route::prefix('/contact')->controller(ContactController::class)->group( function () {
+    Route::post('/store', 'store')->name('contact.store');
+    Route::put('/{id}' , 'update')->name('contact.update');
+    Route::delete('/{id}', 'destroy')->name('contact.destroy');
 });
 
-Route::prefix('/item')->group( function() {
-    Route::post('/store', [ItemController::class, 'store'])->name('item.store');
-    Route::put('/{id}' , [ItemController::class, 'update'])->name('item.update');
-    Route::delete('/{id}', [ItemController::class, 'destroy'])->name('item.destroy');
+Route::prefix('/item')->controller(ItemController::class)->group( function () {
+    Route::post('/store', 'store')->name('item.store');
+    Route::put('/{id}', 'update')->name('item.update');
+    Route::delete('/{id}', 'destroy')->name('item.destroy');
 });
 
-Route::prefix('/project')->group( function() {
-    Route::post('/store', [ProjectController::class, 'store'])->name('project.store');
-    Route::put('/{id}' , [ProjectController::class, 'update'])->name('project.update');
-    Route::delete('/{id}', [ProjectController::class, 'destroy'] )->name('project.destroy');
+Route::prefix('/project')->controller(ProjectController::class)->group( function () {
+    Route::post('/store', 'store')->name('project.store');
+    Route::put('/{id}','update')->name('project.update');
+    Route::delete('/{id}', 'destroy')->name('project.destroy');
 });

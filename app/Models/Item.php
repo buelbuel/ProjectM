@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
+use App\Enums\Priority;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,10 +71,6 @@ class Item extends Model
      * TODO: Cast tracked, estimated with decimals, no negatives
      */
     protected $fillable = [
-        'project_id',
-        'user_id',
-        'status_id',
-        'priority_id',
         'name',
         'description',
         'tracked',
@@ -88,9 +86,11 @@ class Item extends Model
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',
         'deleted_at' => 'timestamp',
+        'completed_at' => 'timestamp',
         'start_date' => 'date',
         'due_date' => 'date',
-        'completed_at' => 'datetime',
+        'status' => Status::class,
+        'priority' => Priority::class,
     ];
 
     /*
