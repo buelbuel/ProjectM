@@ -34,6 +34,10 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/reports', function () {
+        return Inertia::render('Reports');
+    })->name('reports');
+
     Route::controller(AccountController::class)->group( function () {
         Route::get('/account/{id}', 'show');
         Route::get('/accounts', 'index')

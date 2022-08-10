@@ -18241,7 +18241,7 @@ namespace  {
              * @param array|string $columns
              * @param string $pageName
              * @param int|null $page
-             * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
+             * @return \Illuminate\Pagination\LengthAwarePaginator
              * @throws \InvalidArgumentException
              * @static 
              */ 

@@ -25,10 +25,10 @@ class ItemController extends Controller
      * @return \Inertia\Response
      */
     public function index(): \Inertia\Response
-    {
+    {dd(Auth::user()->currentTeam->users());
         return Inertia::render('Items/Index', [
             'projects' => Project::orderBy('projects.created_at')->get()->map->only('number', 'name'),
-            'users' => User::orderBy('users.name')->get()->map->only('number', 'name'),
+            'users' => Auth::user()->currentTeam->users()->orderBy('users.name')->get()->map->only('number', 'name'),
             'priorities' => Options::forEnum(Priority::class),
             'statuses' => Options::forEnum(Status::class),
             'items' => Auth::user()->currentTeam->items()

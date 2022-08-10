@@ -39,17 +39,17 @@ const logout = () => {
             <nav class="navbar bg-base-100">
                 <div class="navbar-start">
                     <div class="dropdown">
-                    <label tabindex="0" class="btn btn-ghost">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                    </label>
-                    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow-lg bg-base-100 w-52">
-                        <li><Link :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</Link></li>
-                        <li><Link href="route('reports')" :active="route().current('reports')">Reports</Link></li>
-                        <li><Link :href="route('items.index')" :class="{ 'text-primary-focus' : route().current('items.index') }">Items</Link></li>
-                        <li><Link :href="route('projects.index')" :active="route().current('projects.index')">Projects</Link></li>
-                        <li><Link :href="route('accounts.index')" :class="{ 'text-primary-focus' : route().current('accounts.index') }">Accounts</Link></li>
-                        <li><Link :href="route('contacts.index')" :active="route().current('contacts.index')">Contacts</Link></li>
-                    </ul>
+                        <label tabindex="0" class="btn btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                        </label>
+                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow-lg bg-base-100 w-52">
+                            <li><Link :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</Link></li>
+                            <li><Link :href="route('reports')" :active="route().current('reports')">Reports</Link></li>
+                            <li><Link :href="route('items.index')" :active="route().current('items.index')">Items</Link></li>
+                            <li><Link :href="route('projects.index')" :active="route().current('projects.index')">Projects</Link></li>
+                            <li><Link :href="route('accounts.index')" :active="route().current('accounts.index')">Accounts</Link></li>
+                            <li><Link :href="route('contacts.index')" :active="route().current('contacts.index')">Contacts</Link></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="navbar-center">
@@ -59,14 +59,79 @@ const logout = () => {
                 </div>
                 <div class="navbar-end">
                     <button class="btn btn-ghost">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </button>
                     <button class="btn btn-ghost">
-                    <div class="indicator">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        <span class="badge badge-xs badge-primary indicator-item"></span>
-                    </div>
+                        <div class="indicator">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                            <span class="badge badge-xs badge-primary indicator-item"></span>
+                        </div>
                     </button>
+                    <div class="dropdown dropdown-left">
+                        <button class="btn btn-ghost">
+                            <div class="avatar mask mask-squircle w-8 h-8">
+                                <img
+                                    v-if="$page.props.jetstream.managesProfilePhotos"
+                                    :src="$page.props.user.profile_photo_url"
+                                    :alt="$page.props.user.name"
+                                />
+                                <span v-else class="inline-flex rounded-md">
+                                <div class="bg-secondary inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                    {{ $page.props.user.name }}
+
+                                    <svg
+                                        class="ml-2 -mr-0.5 h-4 w-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </span>
+                            </div>
+                        </button>
+
+                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow-lg bg-base-100 w-52">
+                            <li class="menu-title"><span>{{ $page.props.user.name }}</span></li>
+                            <li><Link :href="route('profile.show')" :active="route().current('profile.show')">Profile</Link></li>
+                            <template v-if="$page.props.jetstream.hasApiFeatures">
+                                <li><Link :href="route('api-tokens.index')">API Tokens</Link></li>
+                            </template>
+                            <form @submit.prevent="logout">
+                                <JetDropdownLink as="button"> <!-- Todo: change from jet -->
+                                    Log Out
+                                </JetDropdownLink>
+                            </form>
+                            <template v-if="$page.props.jetstream.hasTeamFeatures">
+                                <li class="menu-title mt-4"><span>Manage Team</span></li>
+                                <li><Link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">Team Settings</Link></li>
+                                <template v-if="$page.props.jetstream.canCreateTeams">
+                                    <li><Link :href="route('teams.create')" :active="route().current('teams.create')">Create New Team</Link></li>
+                                </template>
+                                <li class="menu-title mt-4"><span>Switch Teams</span></li>
+                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
+                                    <form @submit.prevent="switchToTeam(team)">
+                                        <JetDropdownLink as="button"> <!-- Todo: change from jet -->
+                                            <div class="flex items-center">
+                                                <svg
+                                                    v-if="team.id == $page.props.user.current_team_id"
+                                                    class="mr-2 h-5 w-5 text-green-400"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                ><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                <div>{{ team.name }}</div>
+                                            </div>
+                                        </JetDropdownLink>
+                                    </form>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
                 </div>
             </nav>
             
